@@ -2,10 +2,9 @@ package se.lexicon.streams_and_lambda;
 
 import java.util.*;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.function.UnaryOperator;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import se.lexicon.streams_and_lambda.utility.Gender;
@@ -85,7 +84,6 @@ public class Lab {
 		// map.forEach(biConsumer::accept);
 		System.out.println(sb);
 
-//System.out.println(map.forEach((String s, Integer i)-> sb.append(s).append(i).toString()));
 	}
 
 	/**
@@ -164,11 +162,6 @@ public class Lab {
 
 		persons.stream().sorted(compareTor).collect(Collectors.toList()).forEach(System.out::println);
 		
-//		System.out.println("sorterad lista");
-//		Collections.sort(persons, compareTor);
-//		persons.forEach(System.out::println);
-		
-
 	}
 
 	/**
@@ -182,9 +175,9 @@ public class Lab {
 		/* Your code here */
 		 
 		Predicate<Person> pred = x -> x.getLastName().equals("Ali") && x.getGender().equals(Gender.MALE);
-//		Predicate<Person> pred and Predicate<Person> pred2= x->x.getGender().equals(Gender.MALE);
-//		Predicate<Person> pred2= x->x.getGender().equals(Gender.MALE);
-		persons.stream().filter(pred).peek(x-> x.setFirstName("Mohammed")).forEach(System.out::println);
+		List<Person> theList = persons.stream().filter(pred).peek(x-> x.setFirstName("Mohammed")).collect(Collectors.toList());
+		
+		theList.iterator().forEachRemaining(System.out::println);
 
 	}
 
@@ -197,7 +190,9 @@ public class Lab {
 
 		/* Your code here */
 		
-		persons.stream().allMatch(x->x.getGender().equals(Gender.FEMALE);
+		long noOfFemales = persons.stream().filter(x->x.getGender().equals(Gender.FEMALE)).count();
+		
+		System.out.println("There are "+noOfFemales+" females in the list.");
 
 	}
 

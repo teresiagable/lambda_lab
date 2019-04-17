@@ -27,7 +27,7 @@ public class Main
 
         Lab theLab = new Lab(persons);
 
-        theLab.exercise10();
+        theLab.exercise11();
         //Run your exercises here
         
     }
